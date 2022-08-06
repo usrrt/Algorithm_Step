@@ -1,0 +1,15 @@
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\bin\Debug\net6.0\ALGORITHM.exe
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\bin\Debug\net6.0\ALGORITHM.deps.json
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\bin\Debug\net6.0\ALGORITHM.runtimeconfig.json
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\bin\Debug\net6.0\ALGORITHM.dll
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\bin\Debug\net6.0\ALGORITHM.pdb
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.csproj.AssemblyReference.cache
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.AssemblyInfoInputs.cache
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.AssemblyInfo.cs
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.csproj.CoreCompileInputs.cache
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.dll
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\refint\ALGORITHM.dll
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.pdb
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ALGORITHM.genruntimeconfig.cache
+C:\Users\gkenf\Desktop\Algorithm_Step\ALGORITHM\ALGORITHM\obj\Debug\net6.0\ref\ALGORITHM.dll
