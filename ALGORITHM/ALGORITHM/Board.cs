@@ -4,76 +4,99 @@ using System.Text;
 
 namespace Algorithm
 {
-    class MyList<T> // <T>정체: C#에서 구현된 List는 Generic타입이므로 <T>를 사용해 어떤 타입에도 사용가능하게 만듬
+    class MyLinkedListNode<T>
     {
-        const int DEFAULT_SIZE = 1;
-        T[] _data = new T[DEFAULT_SIZE];
+        // 참조값이용(주소값을 사용한다)
+        public T Data; // 방안에 들어갈 T는 어떠한 객체라도 들어갈수있게 Data로 만듦
+        public MyLinkedListNode<T> Next; // 다음 방을 가리키는 주소
+        public MyLinkedListNode<T> Prev; // 이전의 방을 가리키는 주소
+    }
 
-        public int Count = 0; // 실제로 사용중인 데이터개수
-        public int Capacity { get { return _data.Length; } } // 예약된 데이터개수 -> 자동으로 정해지는 배열의 길이
+    // 앞,뒤 접근시 시간복잡도가 상수로 아주 빠르지만 중간임의접근시 시간복잡도는 N(처음부터 하나씩 타고가야하므로)
+    class MyLinkedList<T>
+    {
+        // 처음과 마지막방은 알고있어야한다.
+        public MyLinkedListNode<T> Head = null; // 처음
+        public MyLinkedListNode<T> Tail = null; // 마지막
 
-        // O(1) 예외케이스: 공간늘리는 부분 즉, 이사비용이 드는 부분은 많이 실행이 안된다는 가정하에 무시할수있다.
-        public void Add(T item)
+        public int Count = 0;
+
+        // O(1)
+        public MyLinkedListNode<T> AddLast(T data)
         {
-            // 1. 공간이 충분히 남아있는지 확인
-            if (Count >= Capacity)
+            MyLinkedListNode<T> newRoom = new MyLinkedListNode<T>();
+            newRoom.Data = data;
+
+            // 만약 방이 아직 없었다면, 새로 추가한 첫번째방이 곧 Head다.
+            if(Head == null)
             {
-                // 공간을 늘려서 확보한다
-                T[] newArr = new T[Count * 2];
-                for (int i = 0; i < Count; i++)
-                {
-                    newArr[i] = _data[i];
-                }
-                _data = newArr;
+                Head = newRoom;
             }
 
-            // 2. 공간에 데이터를 넣어준다
-            _data[Count] = item;
+            // 기존에 존재하던 [마지막 방]과 [새롭게 추가되는 방]을 연결해준다.
+            if(Tail != null)
+            {
+                Tail.Next = newRoom;
+                newRoom.Prev = Tail;
+            }
+
+            // [새로추가된방]을 [마지막 방]으로 인정한다.
+            Tail = newRoom;
             Count++;
-        }
 
-        // 인덱서구현
-        public T this[int index]
-        {
-            get { return _data[index]; }
-            set { _data[index] = value; }
+            return newRoom;
         }
-
-        // O(N)
-        public void RemoveAt(int index)
+    
+        // 방을 날린다 -> 101 102    104 105
+        // O(1)
+        public void Remove(MyLinkedListNode<T> room)
         {
-            //           101 102 103 104 105
-            // 앞으로 당김 101 102 104 105 105
-            for (int i = index; i < Count - 1; i++) // 최악의 경우를 가정하여 시간복잡도를 계산한다.
+            // [기존의 첫번째방]을 날릴시
+            if (Head == room)
             {
-                _data[i] = _data[i + 1];
+                // [첫번째 다음방]을 Head로 인정한다
+                Head = Head.Next;
             }
-            // 제일 끝부분을 정수형이라면 0, 클래스면 null로 초기화 -> 101 102 104 105 0
-            _data[Count - 1] = default(T);
-            // 배열크기 감소 -> 101 102 104 105
+
+            // [기존의 마지막방] 삭제시
+            if(Tail == room)
+            {
+                // [마지막 방 이전방]을 Tail로 인정한다.
+                Tail = Tail.Prev;
+            }
+
+            // 중간부위 삭제시
+            // [삭제할 방 이전의 방]이 존재한다면
+            if(room.Prev != null)
+            {
+                // [삭제할 이전방의 다음방]과 [삭제할 방 다음방]을 연결
+                room.Prev.Next = room.Next;
+            }
+
+            if(room.Next != null)
+            {
+                room.Next.Prev = room.Prev;
+            }
+
             Count--;
         }
+
     }
 
     class Board
     {
-        // 맵 구성에 필요한 정보를 저장할 적절한 자료구조 선택 -> 내가 만들 맵은 크기가 고정이기 때문에 배열을 쓰는것이 좋다
         public int[] _data = new int[25]; // 배열
-        public MyList<int> _data2 = new MyList<int>(); // 동적배열 -> C++에서 동적배열은 vector로 만들었으나 C#에선 List로 만든다. 장점: 크기조절이 유동적이다
-        public LinkedList<int> _data3 = new LinkedList<int> (); // 연결리스트 -> 장점: 중간 삽입/삭제가 빠르다
+        public MyLinkedList<int> _data3 = new MyLinkedList<int> ();
 
-        // 초기화
         public void Initialize()
         {
-            _data2.Add(101);
-            _data2.Add(102);
-            _data2.Add(103);
-            _data2.Add(104);
-            _data2.Add(105);
+            _data3.AddLast(101);
+            _data3.AddLast(102);
+            MyLinkedListNode<int> temp  = _data3.AddLast(103);
+            _data3.AddLast(104);
+            _data3.AddLast(105);
 
-            int temp = _data2[2];
-
-            _data2.RemoveAt(2);
+            _data3.Remove(temp);
         }
     }
 }
